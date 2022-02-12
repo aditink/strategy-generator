@@ -18,22 +18,19 @@ public class TacticGenerator implements StrategyGenerator {
   BelleExpr suggestion;
 
   public static void main(String[] args){
+    
     TacticGenerator gen = new TacticGenerator();
 
-    //Expression e = (new StringConverter("x>=0")).asExpr(); // replace "s" with expression string
+    //Expression e = (new StringConverter("x+1")).asExpr(); // replace "s" with expression string
 
+    // get sequent
     StringConverter sCon = new StringConverter("x>=0 ==> x>=0");
     if (sCon == null)
       System.out.println("sCon is still null!");
     else
       System.out.println(sCon);
-      System.out.println(sCon.asTactic());
+      System.out.println(sCon.asSequent());
 
-    // get sequent and Provable
-    //Sequent s = new Sequent(sCon.asFormula());
-    //Sequent s2 = new Sequent(new StringConverter("x>=0").asFormula(),new StringConverter("y>=0").asFormula());
-    //Provable p = new Provable(s, new StringConverter("x>=0")).asFormula();
-    //Provable p = new Provable(new StringConverter("x>=0 ==> x>=0").asSequent(), new StringConverter("x>=0 ==> x>=0").asSequent());
 
     gen.getTactic(sCon.asSequent());//,p);
     System.out.println(gen.suggestion);
