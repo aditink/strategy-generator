@@ -31,7 +31,11 @@
     </option>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="759f3c5e-9f19-46d4-a1ef-97cc2b5a3100" name="Default Changelist" comment="" />
+    <list default="true" id="759f3c5e-9f19-46d4-a1ef-97cc2b5a3100" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TacticGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TacticGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy-generator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/strategy-generator.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,10 +69,24 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RunManager">
+    <configuration name="TacticGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TacticGenerator" />
+      <module name="strategy-generator" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TacticGenerator" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -91,23 +109,136 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="384" y="138" key="#Project_Structure" timestamp="1643856863958">
+    <state x="384" y="138" key="#Project_Structure" timestamp="1644810458955">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="384" y="138" key="#Project_Structure/0.0.1792.1120@0.0.1792.1120" timestamp="1643856863958" />
+    <state x="384" y="138" key="#Project_Structure/0.0.1792.1120@0.0.1792.1120" timestamp="1644810458955" />
+    <state x="709" y="270" key="#com.intellij.ide.util.MemberChooser" timestamp="1644817789301">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="709" y="270" key="#com.intellij.ide.util.MemberChooser/0.0.1792.1120@0.0.1792.1120" timestamp="1644817789301" />
     <state x="621" y="253" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1643781802623">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="621" y="253" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1643781802623" />
-    <state x="384" y="138" key="SettingsEditor" timestamp="1643860982088">
+    <state x="921" y="474" key="#xdebugger.evaluate" timestamp="1644817474880">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="384" y="138" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1643860982088" />
+    <state x="921" y="474" key="#xdebugger.evaluate/0.0.1792.1120@0.0.1792.1120" timestamp="1644817474880" />
+    <state x="667" y="439" key="DetectedRootsChooserDialog" timestamp="1644809246733">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="667" y="439" key="DetectedRootsChooserDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1644809246733" />
+    <state width="1750" height="318" key="GridCell.Tab.0.bottom" timestamp="1644818335880">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="318" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1644818335880" />
+    <state width="1750" height="318" key="GridCell.Tab.0.center" timestamp="1644818335879">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="318" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1644818335879" />
+    <state width="1750" height="318" key="GridCell.Tab.0.left" timestamp="1644818335879">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="318" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1644818335879" />
+    <state width="1750" height="318" key="GridCell.Tab.0.right" timestamp="1644818335880">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="318" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1644818335880" />
+    <state width="1750" height="392" key="GridCell.Tab.1.bottom" timestamp="1644818236510">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="392" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1644818236510" />
+    <state width="1750" height="392" key="GridCell.Tab.1.center" timestamp="1644818236509">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="392" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1644818236509" />
+    <state width="1750" height="392" key="GridCell.Tab.1.left" timestamp="1644818236509">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="392" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1644818236509" />
+    <state width="1750" height="392" key="GridCell.Tab.1.right" timestamp="1644818236510">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="392" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1644818236510" />
+    <state width="417" height="127" key="GridCell.Tab.2.bottom" timestamp="1644817499157">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="417" height="127" key="GridCell.Tab.2.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1644817499157" />
+    <state width="417" height="127" key="GridCell.Tab.2.center" timestamp="1644817499156">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="417" height="127" key="GridCell.Tab.2.center/0.0.1792.1120@0.0.1792.1120" timestamp="1644817499156" />
+    <state width="417" height="127" key="GridCell.Tab.2.left" timestamp="1644818236510">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="417" height="127" key="GridCell.Tab.2.left/0.0.1792.1120@0.0.1792.1120" timestamp="1644818236510" />
+    <state width="417" height="127" key="GridCell.Tab.2.right" timestamp="1644817499156">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="417" height="127" key="GridCell.Tab.2.right/0.0.1792.1120@0.0.1792.1120" timestamp="1644817499156" />
+    <state width="417" height="127" key="GridCell.Tab.3.bottom" timestamp="1644817499142">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="417" height="127" key="GridCell.Tab.3.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1644817499142" />
+    <state width="417" height="127" key="GridCell.Tab.3.center" timestamp="1644817499141">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="417" height="127" key="GridCell.Tab.3.center/0.0.1792.1120@0.0.1792.1120" timestamp="1644817499141" />
+    <state width="417" height="127" key="GridCell.Tab.3.left" timestamp="1644817499141">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="417" height="127" key="GridCell.Tab.3.left/0.0.1792.1120@0.0.1792.1120" timestamp="1644817499141" />
+    <state width="417" height="127" key="GridCell.Tab.3.right" timestamp="1644817499141">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="417" height="127" key="GridCell.Tab.3.right/0.0.1792.1120@0.0.1792.1120" timestamp="1644817499141" />
+    <state x="384" y="138" key="SettingsEditor" timestamp="1644810215454">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="384" y="138" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1644810215454" />
     <state x="609" y="456" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1643781992745">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="609" y="456" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1792.1120@0.0.1792.1120" timestamp="1643781992745" />
+    <state x="73" y="239" width="417" height="146" key="dock-window-1" timestamp="1644791697870">
+      <screen x="0" y="25" width="1792" height="1033" />
+    </state>
+    <state x="73" y="239" width="417" height="146" key="dock-window-1/0.25.1792.1033@0.25.1792.1033" timestamp="1644791697870" />
+    <state x="73" y="221" width="417" height="146" key="dock-window-2" timestamp="1644792582965">
+      <screen x="0" y="25" width="1792" height="1033" />
+    </state>
+    <state x="73" y="221" width="417" height="146" key="dock-window-2/0.25.1792.1033@0.25.1792.1033" timestamp="1644792582965" />
+    <state x="73" y="203" width="417" height="146" key="dock-window-3" timestamp="1644792913657">
+      <screen x="0" y="25" width="1792" height="1033" />
+    </state>
+    <state x="73" y="203" width="417" height="146" key="dock-window-3/0.25.1792.1033@0.25.1792.1033" timestamp="1644792913657" />
+    <state x="73" y="185" width="417" height="146" key="dock-window-4" timestamp="1644809063151">
+      <screen x="0" y="25" width="1792" height="1033" />
+    </state>
+    <state x="73" y="185" width="417" height="146" key="dock-window-4/0.25.1792.1033@0.25.1792.1033" timestamp="1644809063151" />
+    <state x="73" y="167" width="417" height="146" key="dock-window-5" timestamp="1644818046659">
+      <screen x="0" y="25" width="1792" height="1033" />
+    </state>
+    <state x="73" y="167" width="417" height="146" key="dock-window-5/0.25.1792.1033@0.25.1792.1033" timestamp="1644818046659" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TacticGenerator.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/TacticGenerator.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

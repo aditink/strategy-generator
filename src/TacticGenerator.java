@@ -1,17 +1,23 @@
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import edu.cmu.cs.ls.keymaerax.FileConfiguration$;
 import edu.cmu.cs.ls.keymaerax.bellerophon.BelleExpr;
-import edu.cmu.cs.ls.keymaerax.core.Provable;
-import edu.cmu.cs.ls.keymaerax.core.Sequent;
-import edu.cmu.cs.ls.keymaerax.core.Expression;
-import edu.cmu.cs.ls.keymaerax.parser.KeYmaeraXParser;
-import edu.cmu.cs.ls.keymaerax.parser.StringConverter;
-import edu.cmu.cs.ls.keymaerax.parser.Parser;
-
+import edu.cmu.cs.ls.keymaerax.cli.Usage;
+import edu.cmu.cs.ls.keymaerax.core.*;
+import edu.cmu.cs.ls.keymaerax.parser.*;
+import edu.cmu.cs.ls.keymaerax.Configuration;
+import edu.cmu.cs.ls.keymaerax.cli.KeYmaeraX;
+import edu.cmu.cs.ls.keymaerax.FileConfiguration;
 import edu.cmu.cs.ls.keymaerax.btactics.TactixLibrary;
 
 import edu.cmu.cs.ls.keymaerax.btactics.HybridProgramCalculus;
+import edu.cmu.cs.ls.keymaerax.bellerophon.parser.*;
+import scala.Symbol;
+import scala.Tuple2;
+import scala.collection.immutable.Map;
+import scala.collection.immutable.Map$;
 
 public class TacticGenerator implements StrategyGenerator {
 
@@ -27,9 +33,12 @@ public class TacticGenerator implements StrategyGenerator {
     StringConverter sCon = new StringConverter("x>=0 ==> x>=0");
     if (sCon == null)
       System.out.println("sCon is still null!");
-    else
-      System.out.println(sCon);
-      System.out.println(sCon.asSequent());
+    else {
+      KeYmaeraX.initializeProver(Map$.MODULE$.empty(), Usage.cliUsage());
+      DLParser parser = new DLParser();
+      Expression sequent = parser.apply("x>=0");
+      System.out.println(sequent.prettyString());
+    }
 
 
     gen.getTactic(sCon.asSequent());//,p);
