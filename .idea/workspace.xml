@@ -32,9 +32,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="759f3c5e-9f19-46d4-a1ef-97cc2b5a3100" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TacticGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TacticGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategy-generator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/strategy-generator.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,22 +130,22 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="667" y="439" key="DetectedRootsChooserDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1644809246733" />
-    <state width="1750" height="318" key="GridCell.Tab.0.bottom" timestamp="1644818335880">
+    <state width="1750" height="318" key="GridCell.Tab.0.bottom" timestamp="1644818906685">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="318" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1644818335880" />
-    <state width="1750" height="318" key="GridCell.Tab.0.center" timestamp="1644818335879">
+    <state width="1750" height="318" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1644818906685" />
+    <state width="1750" height="318" key="GridCell.Tab.0.center" timestamp="1644818906684">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="318" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1644818335879" />
-    <state width="1750" height="318" key="GridCell.Tab.0.left" timestamp="1644818335879">
+    <state width="1750" height="318" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1644818906684" />
+    <state width="1750" height="318" key="GridCell.Tab.0.left" timestamp="1644818906683">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="318" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1644818335879" />
-    <state width="1750" height="318" key="GridCell.Tab.0.right" timestamp="1644818335880">
+    <state width="1750" height="318" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1644818906683" />
+    <state width="1750" height="318" key="GridCell.Tab.0.right" timestamp="1644818906684">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="318" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1644818335880" />
+    <state width="1750" height="318" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1644818906684" />
     <state width="1750" height="392" key="GridCell.Tab.1.bottom" timestamp="1644818236510">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -230,7 +228,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/TacticGenerator.java</url>
-          <line>40</line>
+          <line>41</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

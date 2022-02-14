@@ -36,7 +36,8 @@ public class TacticGenerator implements StrategyGenerator {
     else {
       KeYmaeraX.initializeProver(Map$.MODULE$.empty(), Usage.cliUsage());
       DLParser parser = new DLParser();
-      Expression sequent = parser.apply("x>=0");
+      Expression expr = parser.apply("x>=0");
+      Sequent sequent = parser.sequentParser().apply("x>=0 ==> x>=0");
       System.out.println(sequent.prettyString());
     }
 
