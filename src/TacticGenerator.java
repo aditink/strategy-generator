@@ -14,10 +14,14 @@ import edu.cmu.cs.ls.keymaerax.btactics.TactixLibrary;
 
 import edu.cmu.cs.ls.keymaerax.btactics.HybridProgramCalculus;
 import edu.cmu.cs.ls.keymaerax.bellerophon.parser.*;
+import edu.cmu.cs.ls.keymaerax.btactics.TactixLibrary.*;
 import scala.Symbol;
+import scala.Symbol$;
 import scala.Tuple2;
+import scala.Tuple2$;
 import scala.collection.immutable.Map;
 import scala.collection.immutable.Map$;
+import scala.collection.mutable.Builder;
 
 public class TacticGenerator implements StrategyGenerator {
 
@@ -34,7 +38,11 @@ public class TacticGenerator implements StrategyGenerator {
     if (sCon == null)
       System.out.println("sCon is still null!");
     else {
-      KeYmaeraX.initializeProver(Map$.MODULE$.empty(), Usage.cliUsage());
+      Symbol tool = Symbol$.MODULE$.apply("tool");
+      Tuple2 tuple = Tuple2$.MODULE$.apply(tool, "mathematica");
+      Builder<Tuple2<Symbol, Object>, Map<Symbol, Object>> builder = Map$.MODULE$.<Symbol, Object>newBuilder().$plus$eq(tuple);
+      Map<Symbol, Object> options = builder.result();
+      KeYmaeraX.initializeProver(options, Usage.cliUsage());
       DLParser parser = new DLParser();
       Expression expr = parser.apply("x>=0");
       Sequent sequent = parser.sequentParser().apply("x>=0 ==> x>=0");
@@ -44,6 +52,13 @@ public class TacticGenerator implements StrategyGenerator {
 
     gen.getTactic(sCon.asSequent());//,p);
     System.out.println(gen.suggestion);
+  }
+
+  private BelleExpr GenTactic() {
+    SuccPos pos = new SuccPos(1);
+    BelleExpr tact = TactixLibrary.implyR();
+    BelleExpr orMaybeItsThis = TactixLibrary.implyR().apply(pos);
+    return tact;
   }
 
   public void getTactic(Sequent s){//, Provable p){
@@ -73,7 +88,7 @@ public class TacticGenerator implements StrategyGenerator {
     // return "Loop Invariant" with arg J derived from algorithm <- HybridProgramCalculus.scala
     //BelleExpr loopInv = new BelleExpr(loop(new StringConverter("x>=0").asFormula()));
     //BelleExpr loopInv = new StringConverter(loop(new StringConverter("x>=0").asFormula())).asTactic();
-    BelleExpr loopInv = new StringConverter("loop(x>=0)(1)").asTactic();
+    BelleExpr loopInv = new StringConverter("loop(x>=0,1)").asTactic();
     return loopInv;
     //return new loop(new StringConverter("x>=0").asFormula());//(1); // TESTING SYNTAX WITH loop("x>=0".asFormula)(1)
   }
