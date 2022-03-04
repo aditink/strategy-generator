@@ -61,6 +61,14 @@ public class TacticGenerator implements StrategyGenerator {
     return tact;
   }
 
+  private void DeconstructExpression(Sequent s) {
+    Formula firstSucc = s.succ().head();
+    if (firstSucc instanceof Box) {
+      Formula child = ((Box) firstSucc).child();
+      Program program = ((Box) firstSucc).program();
+    }
+  }
+
   public void getTactic(Sequent s){//, Provable p){
     this.suggestion = getLoopInv(s);//,p);
     return;
