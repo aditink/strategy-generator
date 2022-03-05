@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="strategy-generator:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -32,8 +37,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="759f3c5e-9f19-46d4-a1ef-97cc2b5a3100" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TacticGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TacticGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StrategyGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tacticgen/StrategyGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TacticGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tacticgen/TacticGenerator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,8 +74,9 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
@@ -119,10 +127,22 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="709" y="270" key="#com.intellij.ide.util.MemberChooser/0.0.1792.1120@0.0.1792.1120" timestamp="1644817789301" />
+    <state x="633" y="354" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1646508472595">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="633" y="354" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1646508472595" />
     <state x="621" y="253" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1643781802623">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="621" y="253" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1643781802623" />
+    <state x="634" y="311" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1646507897756">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="634" y="311" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1646507897756" />
+    <state x="634" y="318" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog" timestamp="1646508045269">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="634" y="318" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1646508045269" />
     <state x="921" y="474" key="#xdebugger.evaluate" timestamp="1644817474880">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -131,22 +151,22 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="667" y="439" key="DetectedRootsChooserDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1644809246733" />
-    <state width="1750" height="318" key="GridCell.Tab.0.bottom" timestamp="1645630804725">
+    <state width="1750" height="318" key="GridCell.Tab.0.bottom" timestamp="1646512403376">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="318" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1645630804725" />
-    <state width="1750" height="318" key="GridCell.Tab.0.center" timestamp="1645630804725">
+    <state width="1750" height="318" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1646512403376" />
+    <state width="1750" height="318" key="GridCell.Tab.0.center" timestamp="1646512403375">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="318" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1645630804725" />
-    <state width="1750" height="318" key="GridCell.Tab.0.left" timestamp="1645630804724">
+    <state width="1750" height="318" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1646512403375" />
+    <state width="1750" height="318" key="GridCell.Tab.0.left" timestamp="1646512403375">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="318" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1645630804724" />
-    <state width="1750" height="318" key="GridCell.Tab.0.right" timestamp="1645630804725">
+    <state width="1750" height="318" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1646512403375" />
+    <state width="1750" height="318" key="GridCell.Tab.0.right" timestamp="1646512403375">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="318" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1645630804725" />
+    <state width="1750" height="318" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1646512403375" />
     <state width="1750" height="392" key="GridCell.Tab.1.bottom" timestamp="1644818236510">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -195,10 +215,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="417" height="127" key="GridCell.Tab.3.right/0.0.1792.1120@0.0.1792.1120" timestamp="1644817499141" />
-    <state x="384" y="138" key="SettingsEditor" timestamp="1644810215454">
+    <state x="384" y="138" key="SettingsEditor" timestamp="1646508498665">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="384" y="138" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1644810215454" />
+    <state x="384" y="138" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1646508498665" />
     <state x="609" y="456" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1643781992745">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -232,14 +252,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TacticGenerator.java</url>
-          <line>49</line>
+          <url>file://$PROJECT_DIR$/src/tacticgen/TacticGenerator.java</url>
+          <line>35</line>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TacticGenerator.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
