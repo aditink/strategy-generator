@@ -20,6 +20,7 @@ import edu.cmu.cs.ls.keymaerax.btactics.TactixLibrary;
 
 import edu.cmu.cs.ls.keymaerax.btactics.HybridProgramCalculus;
 import edu.cmu.cs.ls.keymaerax.bellerophon.parser.*;
+import edu.cmu.cs.ls.keymaerax.btactics.TactixLibrary.*;
 import scala.Symbol;
 import scala.Symbol$;
 import scala.Tuple2;
