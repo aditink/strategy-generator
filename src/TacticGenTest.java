@@ -1,10 +1,5 @@
 /*
 TODOS:
-Add actual loop invariant algorithm
-
-split TacticGenerator into helper functions (strToSequent, etc, relies on initializeProver())
-tactic generator (getTactic, no dependency on initializeProver) 
-and tests 
 use "withMathematica" (find reference in keymaerax) instead of initializeProver for test function: function that I can wrap around test functions
 */
 
@@ -17,6 +12,7 @@ import edu.cmu.cs.ls.keymaerax.bellerophon.BelleExpr;
 import edu.cmu.cs.ls.keymaerax.cli.Usage;
 import edu.cmu.cs.ls.keymaerax.core.*;
 import edu.cmu.cs.ls.keymaerax.parser.*;
+import edu.cmu.cs.ls.keymaerax.pt.ProvableSig;
 import edu.cmu.cs.ls.keymaerax.Configuration;
 import edu.cmu.cs.ls.keymaerax.Configuration$;
 import edu.cmu.cs.ls.keymaerax.cli.KeYmaeraX;
@@ -33,9 +29,16 @@ import scala.Tuple2$;
 import scala.collection.mutable.Builder;
 import scala.collection.immutable.Map;
 import scala.collection.immutable.Map$;
+import scala.Option;
+import scala.Option$;
 
 import tacticgen.*;
 import tacticgenhelper.*;
+
+import scala.math.BigDecimal;
+import edu.cmu.cs.ls.keymaerax.core.Number;
+import scala.collection.JavaConverters;
+import scala.collection.JavaConverters$;
 
 public class TacticGenTest {
 
@@ -44,10 +47,32 @@ public class TacticGenTest {
     TacticGenerator tgen = new TacticGenerator();
 
 
-    String s = new String("y>0 ==> x>0 -> x>0");
+    String s = new String("y>0 ==> [{x'=0};]x>=0");
+    Sequent seq = TacticGenHelper.strToSequent(s);
+
+    /*Provable p = Provable.startProof(seq);
+    System.out.println(p.prettyString());
+
+    Program prog = TacticGenHelper.getProgram(seq);
+    System.out.println(prog.prettyString());
+
+    BelleExpr solveTactic = TactixLibrary.solve();
+
+    ProvableSig postRule = TactixLibrary.proveBy(seq, solveTactic);
+    System.out.println(postRule.prettyString());
 
     BelleExpr tactic = tgen.getTactic(TacticGenHelper.strToSequent(s));
-    System.out.println(tactic.prettyString());
+    System.out.println(tactic.prettyString());*/
+
+    DifferentialProgram diffSys = (DifferentialProgram) TacticGenHelper.strToDE("x'=1");
+    Variable diffArg = new BaseVariable("t", Option$.MODULE$.empty(), Real$.MODULE$);
+    HashMap<Variable,Variable> iv = new HashMap<Variable,Variable>();
+    //iv.put(new BaseVariable("x", Option$.MODULE$.empty(), Real$.MODULE$), new Number(BigDecimal.decimal(0)));
+    iv.put(new BaseVariable("x", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("y", Option$.MODULE$.empty(), Real$.MODULE$));
+    //Map<Variable,Variable> iv = Map$.MODULE$.empty(); // this needs to map x to 0
+
+    Option<Formula> odeSolved = TacticGenHelper.getDESolution(diffSys, diffArg, JavaConverters$.asScalaMap(iv));
+    System.out.println(odeSolved);
   }
 
 }
