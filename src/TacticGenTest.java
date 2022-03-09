@@ -50,20 +50,20 @@ public class TacticGenTest {
     String s = new String("y>0 ==> [{x'=0};]x>=0");
     Sequent seq = TacticGenHelper.strToSequent(s);
 
-    /*Provable p = Provable.startProof(seq);
-    System.out.println(p.prettyString());
-
-    Program prog = TacticGenHelper.getProgram(seq);
-    System.out.println(prog.prettyString());
+ 
+    // Try using proveBy()
+    System.out.println(seq.prettyString());
 
     BelleExpr solveTactic = TactixLibrary.solve();
 
-    ProvableSig postRule = TactixLibrary.proveBy(seq, solveTactic);
+    ProvableSig postRule = TactixLibrary.proveBy(seq, solveTactic); // TODO: solve tactic needs position arg
     System.out.println(postRule.prettyString());
 
-    BelleExpr tactic = tgen.getTactic(TacticGenHelper.strToSequent(s));
-    System.out.println(tactic.prettyString());*/
+    //BelleExpr tactic = tgen.getTactic(TacticGenHelper.strToSequent(s));
+    //System.out.println(tactic.prettyString());
 
+
+    // try solving ODE
     DifferentialProgram diffSys = (DifferentialProgram) TacticGenHelper.strToDE("x'=1");
     Variable diffArg = new BaseVariable("t", Option$.MODULE$.empty(), Real$.MODULE$);
     HashMap<Variable,Variable> iv = new HashMap<Variable,Variable>();
@@ -71,10 +71,10 @@ public class TacticGenTest {
     iv.put(new BaseVariable("x", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("y", Option$.MODULE$.empty(), Real$.MODULE$));
     //Map<Variable,Variable> iv = Map$.MODULE$.empty(); // this needs to map x to 0
 
-    Option<Formula> odeSolved = TacticGenHelper.getDESolution(diffSys, diffArg, JavaConverters$.asScalaMap(iv));
-    System.out.println(odeSolved);
-  }
+    //Option<Formula> odeSolved = TacticGenHelper.getDESolution(diffSys, diffArg, JavaConverters$.asScala(iv)); // TODO: recognize asScala()
+    //System.out.println(odeSolved);
 
+  }
 }
 
 
