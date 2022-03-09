@@ -1,11 +1,5 @@
 /*
 TODOS:
-Add actual loop invariant algorithm
-
-split TacticGenerator into helper functions (strToSequent, etc, relies on initializeProver())
-tactic generator (getTactic, no dependency on initializeProver) 
-and tests 
-use "withMathematica" (find reference in keymaerax) instead of initializeProver for test function: function that I can wrap around test functions
 */
 
 package tacticgenhelper;
@@ -19,6 +13,9 @@ import edu.cmu.cs.ls.keymaerax.bellerophon.BelleExpr;
 import edu.cmu.cs.ls.keymaerax.cli.Usage;
 import edu.cmu.cs.ls.keymaerax.core.*;
 import edu.cmu.cs.ls.keymaerax.parser.*;
+import edu.cmu.cs.ls.keymaerax.tools.ext.JLinkMathematicaLink;
+import edu.cmu.cs.ls.keymaerax.tools.ext.MathematicaLink;
+import edu.cmu.cs.ls.keymaerax.tools.ext.MathematicaODESolverTool;
 import edu.cmu.cs.ls.keymaerax.Configuration;
 import edu.cmu.cs.ls.keymaerax.Configuration$;
 import edu.cmu.cs.ls.keymaerax.cli.KeYmaeraX;
@@ -28,6 +25,7 @@ import edu.cmu.cs.ls.keymaerax.btactics.TactixLibrary;
 import edu.cmu.cs.ls.keymaerax.btactics.HybridProgramCalculus;
 import edu.cmu.cs.ls.keymaerax.bellerophon.parser.*;
 import edu.cmu.cs.ls.keymaerax.btactics.TactixLibrary.*;
+import scala.Option;
 import scala.Symbol;
 import scala.Symbol$;
 import scala.Tuple2;
@@ -49,6 +47,11 @@ public class TacticGenHelper{
   public static Formula strToFormula(String s){
     DLParser parser = new DLParser();
     return parser.formulaParser().apply(s);
+  }
+
+  public static DifferentialProgram strToDE(String s){
+    DLParser parser = new DLParser();
+    return parser.differentialProgramParser().apply(s);
   }
 
 
@@ -78,6 +81,20 @@ public class TacticGenHelper{
       else
         return "other";
     }
+  }
+
+  public static Formula getSafetyCond(Sequent s){
+    return ((Box) s.succ().head()).child();
+  }
+
+  public static Program getProgram(Sequent s){
+    return ((Box) s.succ().head()).program();
+  }
+
+  public static Option<Formula> getDESolution(DifferentialProgram diffSys, Variable diffArg, Map<Variable,Variable> iv){
+    MathematicaODESolverTool odeSolver = new MathematicaODESolverTool(new JLinkMathematicaLink("mathematica"));
+    Option<Formula> odeSolution = odeSolver.odeSolve(diffSys, diffArg, iv);
+    return odeSolution;
   }
 
 }
