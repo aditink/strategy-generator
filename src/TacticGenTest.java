@@ -47,28 +47,32 @@ public class TacticGenTest {
     TacticGenerator tgen = new TacticGenerator();
 
 
-    String s = new String("y>0 ==> [{x'=0};]x>=0");
-    Sequent seq = TacticGenHelper.strToSequent(s);
+    Sequent seq = TacticGenHelper.strToSequent("y>0 ==> [{{x'=1};}*]pL-pC>=0");
+    //String s = new String("y>0 ==> [{x:=1;}++{x:=-1;};]x>=0");
+
+    BelleExpr tactic = tgen.getTactic(seq);
+    System.out.println(tactic.prettyString());
 
  
     // Try using proveBy()
-    System.out.println(seq.prettyString());
+    /*System.out.println(seq.prettyString());
 
-    BelleExpr solveTactic = TactixLibrary.solve();
+    BelleExpr solveTactic = TactixLibrary.solve().apply(new SuccPos(0));
+    BelleExpr unfoldTactic = TactixLibrary.unfoldProgramNormalize();
 
     ProvableSig postRule = TactixLibrary.proveBy(seq, solveTactic); // TODO: solve tactic needs position arg
-    System.out.println(postRule.prettyString());
+    System.out.println(postRule.prettyString());*/
 
-    //BelleExpr tactic = tgen.getTactic(TacticGenHelper.strToSequent(s));
-    //System.out.println(tactic.prettyString());
+
+
 
 
     // try solving ODE
-    DifferentialProgram diffSys = (DifferentialProgram) TacticGenHelper.strToDE("x'=1");
-    Variable diffArg = new BaseVariable("t", Option$.MODULE$.empty(), Real$.MODULE$);
-    HashMap<Variable,Variable> iv = new HashMap<Variable,Variable>();
-    //iv.put(new BaseVariable("x", Option$.MODULE$.empty(), Real$.MODULE$), new Number(BigDecimal.decimal(0)));
-    iv.put(new BaseVariable("x", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("y", Option$.MODULE$.empty(), Real$.MODULE$));
+    // DifferentialProgram diffSys = (DifferentialProgram) TacticGenHelper.strToDE("x'=1");
+    // Variable diffArg = new BaseVariable("t", Option$.MODULE$.empty(), Real$.MODULE$);
+    // HashMap<Variable,Variable> iv = new HashMap<Variable,Variable>();
+    // //iv.put(new BaseVariable("x", Option$.MODULE$.empty(), Real$.MODULE$), new Number(BigDecimal.decimal(0)));
+    // iv.put(new BaseVariable("x", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("y", Option$.MODULE$.empty(), Real$.MODULE$));
     //Map<Variable,Variable> iv = Map$.MODULE$.empty(); // this needs to map x to 0
 
     //Option<Formula> odeSolved = TacticGenHelper.getDESolution(diffSys, diffArg, JavaConverters$.asScala(iv)); // TODO: recognize asScala()
