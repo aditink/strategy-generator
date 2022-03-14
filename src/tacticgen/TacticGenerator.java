@@ -4,7 +4,7 @@ Add actual loop invariant algorithm
   1. apply tactics to get solved DE
   2. parse out CC choices and LC choices
   3. algebraic manipulation of formulas (solve for t)
-  4. finish section 6 of loop invariant algorithm
+  4. get dynamics conditions and constant assumptions
 */
 
 package tacticgen;
@@ -55,7 +55,7 @@ public class TacticGenerator implements StrategyGenerator{
   private BelleExpr getLoopInv(Sequent s){//, Provable p){
     // Loop Invariant Algorithm:
     Formula J;
-    Formula initialConds = TacticGenHelper.getInitConds(s); // TODO: write getInitConds(), hardcode for now
+    Formula initialConds = TacticGenHelper.getInitConds(s); // TODO: write getConstAssumpts which getInitConds() depends on, hardcode for now
     
     // 1. set LI = safety condition (safety condition has to be in the form a >= 0 or a > 0)
     J = TacticGenHelper.getSafetyConds(s);
@@ -77,7 +77,7 @@ public class TacticGenerator implements StrategyGenerator{
         bestCCChoice = choice; 
       }
       Formula f = new Imply(initialConds, new GreaterEqual(TacticGenHelper.strToTerm(TacticGenHelper.subVar("aC", choice.toString(), lhsSafetyPostDyn.toString())), TacticGenHelper.strToTerm(TacticGenHelper.subVar("aC", bestCCChoice.toString(), lhsSafetyPostDyn.toString()))));
-      if (TacticGenHelper.isTrue(f)){ // TODO: substitute into formula, run aC:=choice? TODO: compare formulas (use mathematica (QE) to see if A>0,B>0 ==> safetyPostDyn(choice) > safetyPostDyn(bestCCChoice) is provable?)
+      if (TacticGenHelper.isTrue(f)){
         bestCCChoice = choice;
       }
     }
@@ -109,21 +109,29 @@ public class TacticGenerator implements StrategyGenerator{
     // 6. loop through dynamics conditions that CC controls (conditions with pC, vC, and aC)
     // find 't' when the condition breaks assuming bestCCChoice
     // if t >= 0 && t =< tUntilBroken, tUntilBroken = t 
-    ArrayList<Formula> dynConds = TacticGenHelper.getDynConds(s); // TODO: get dynamics conditions from sequent
-    Term tUntilBroken;
-    for (Formula cond : dynConds){
+    Formula dynConds = TacticGenHelper.getDynConds(s); // TODO: get dynamics conditions from sequent
+    ArrayList<Formula> dynCondsList = new ArrayList<Formula>();
+    for (String cond : dynConds.toString().split("&")){
+      dynCondsList.add(TacticGenHelper.strToFormula(cond));
+    }
+
+    Term tUntilBroken = null;
+    for (Formula cond : dynCondsList){
       if (cond.toString().contains("pC") || cond.toString().contains("vC") || cond.toString().contains("aC")){ // TODO: get vars that CC controls
         // TODO: get t when condition breaks;
-        Term t;
-        t = TacticGenHelper.strToTerm("vC/B");
+        Term t; 
+        t = TacticGenHelper.strToTerm("vC/B"); // TODO: remove hardcoding
         Formula solvedForT = new Equal(new BaseVariable("t", Option$.MODULE$.empty(), Real$.MODULE$), t);
-        // TODO: also need constant assumptions and dynamic conditions on the left of the implications
-        if (TacticGenHelper.isTrue(new Imply(solvedForT, TacticGenHelper.strToFormula("t>=0"))) && TacticGenHelper.isTrue(new Imply(solvedForT, TacticGenHelper.strToFormula("t<=tUntilBroken")))){
+
+        //System.out.println((new Imply(new And(new And(solvedForT, TacticGenHelper.getConstAssumpts(s)), TacticGenHelper.getDynConds(s)), TacticGenHelper.strToFormula("t>=0"))));
+        //System.out.println((new Imply(solvedForT, TacticGenHelper.strToFormula("t<=tUntilBroken"))));
+
+        // if constant assumptions, dynamic conditions, and t=solvedForT => t>=0 & t<=tUntilBroken, then tUntilBroken = t
+        if (TacticGenHelper.isTrue(new Imply(new And(new And(solvedForT, TacticGenHelper.getConstAssumpts(s)), TacticGenHelper.getDynConds(s)), TacticGenHelper.strToFormula("t>=0"))) && tUntilBroken == null || TacticGenHelper.isTrue(new Imply(new And(new And(solvedForT, TacticGenHelper.getConstAssumpts(s)), TacticGenHelper.getDynConds(s)), TacticGenHelper.strToFormula("t<=tUntilBroken")))){
           tUntilBroken = t;
         }
       }
     }
-    tUntilBroken = TacticGenHelper.strToTerm("vC/B"); // TODO: remove hardcoding
 
     // 7. if tUntilBroken != null, replace 't' in safetySubbedChoices with tUntilBroken and add that to J. Otherwise add safetySubbedChoices to J as is (safetySubbedChoices has to stay invariant for all t)
     if (tUntilBroken != null){

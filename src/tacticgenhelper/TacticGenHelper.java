@@ -124,14 +124,15 @@ public class TacticGenHelper{
   }
 
   public static Formula getInitConds(Sequent s){ // TODO: can assume safety conditions + constant assumptions
-    return new And(getSafetyConds(s), (strToFormula("A>0&B>0")));
+    return new And(getSafetyConds(s), getConstAssumpts(s));
   }
 
-  public static ArrayList<Formula> getDynConds(Sequent s){ // TODO: parse out dynamics conditions
-    ArrayList<Formula> dynConds = new ArrayList<Formula>();
-    dynConds.add(strToFormula("vC>=0"));
-    dynConds.add(strToFormula("vL>=0"));
-    return dynConds;
+  public static Formula getDynConds(Sequent s){ // TODO: parse out dynamics conditions
+    return strToFormula("vC>=0&vL>=0");
+  }
+
+  public static Formula getConstAssumpts(Sequent s){ // TODO: get constant assumptions
+    return strToFormula("A>0&B>0");
   }
 
 }
