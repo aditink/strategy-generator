@@ -54,13 +54,14 @@ public class TacticGenTest {
 
     // let's try and initialize a map
     // initialize Tuple first
-    Tuple2<BaseVariable,BaseVariable> iv1 = Tuple2$.MODULE$.apply(new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$),new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$));
+    // Tuple2<BaseVariable,BaseVariable> iv1 = Tuple2$.MODULE$.apply(new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$),new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$));
 
     // then initialize sequence from tuple (need to add several tuples)
-    //Seq<Tuple2<BaseVariable,BaseVariable>> ivs = Seq$.MODULE$.apply(iv1);
+    // Seq<Tuple2<BaseVariable,BaseVariable>> ivs = Seq$.MODULE$.apply(iv1);
     
     // then make Map out of sequence like here
-    //Map<Variable,Variable> iv = Map$.MODULE$.apply(ivs);
+    Map<Variable,Variable> iv = new Map.Map1(new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$),
+            new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$)); //Map$.MODULE$.
 
     // TEST
     System.out.println("PRINTING MAP");

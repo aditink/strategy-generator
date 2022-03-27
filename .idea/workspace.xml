@@ -37,10 +37,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="759f3c5e-9f19-46d4-a1ef-97cc2b5a3100" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/strategy_generator_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/strategy_generator_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StrategyGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tacticgen/StrategyGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TacticGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tacticgen/TacticGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/strategy_generator_jar/strategy-generator.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/strategy_generator_jar/strategy-generator.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TacticGenTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TacticGenTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +81,14 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.TacticGenTest">
+    <configuration name="TacticGenTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TacticGenTest" />
+      <module name="strategy-generator" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TacticGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TacticGenerator" />
       <module name="strategy-generator" />
@@ -91,6 +98,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TacticGenTest" />
         <item itemvalue="Application.TacticGenerator" />
       </list>
     </recent_temporary>
@@ -151,22 +159,26 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="667" y="439" key="DetectedRootsChooserDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1644809246733" />
-    <state width="1750" height="318" key="GridCell.Tab.0.bottom" timestamp="1646512403376">
+    <state width="1750" height="318" key="GridCell.Tab.0.bottom" timestamp="1648416716185">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="318" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1646512403376" />
-    <state width="1750" height="318" key="GridCell.Tab.0.center" timestamp="1646512403375">
+    <state width="1750" height="318" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1648416716185" />
+    <state width="1750" height="318" key="GridCell.Tab.0.bottom/0.25.1792.1033@0.25.1792.1033" timestamp="1646538441401" />
+    <state width="1750" height="318" key="GridCell.Tab.0.center" timestamp="1648416716184">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="318" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1646512403375" />
-    <state width="1750" height="318" key="GridCell.Tab.0.left" timestamp="1646512403375">
+    <state width="1750" height="318" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1648416716184" />
+    <state width="1750" height="318" key="GridCell.Tab.0.center/0.25.1792.1033@0.25.1792.1033" timestamp="1646538441400" />
+    <state width="1750" height="318" key="GridCell.Tab.0.left" timestamp="1648416716184">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="318" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1646512403375" />
-    <state width="1750" height="318" key="GridCell.Tab.0.right" timestamp="1646512403375">
+    <state width="1750" height="318" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1648416716184" />
+    <state width="1750" height="318" key="GridCell.Tab.0.left/0.25.1792.1033@0.25.1792.1033" timestamp="1646538441400" />
+    <state width="1750" height="318" key="GridCell.Tab.0.right" timestamp="1648416716184">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="318" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1646512403375" />
+    <state width="1750" height="318" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1648416716184" />
+    <state width="1750" height="318" key="GridCell.Tab.0.right/0.25.1792.1033@0.25.1792.1033" timestamp="1646538441401" />
     <state width="1750" height="392" key="GridCell.Tab.1.bottom" timestamp="1644818236510">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -215,10 +227,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state width="417" height="127" key="GridCell.Tab.3.right/0.0.1792.1120@0.0.1792.1120" timestamp="1644817499141" />
-    <state x="384" y="138" key="SettingsEditor" timestamp="1646508498665">
+    <state x="384" y="138" key="SettingsEditor" timestamp="1646515157632">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="384" y="138" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1646508498665" />
+    <state x="384" y="138" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1646515157632" />
     <state x="609" y="456" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1643781992745">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -243,17 +255,26 @@
       <screen x="0" y="25" width="1792" height="1033" />
     </state>
     <state x="73" y="167" width="417" height="146" key="dock-window-5/0.25.1792.1033@0.25.1792.1033" timestamp="1644818046659" />
-    <state x="597" y="315" width="597" height="490" key="find.popup" timestamp="1645652212066">
+    <state x="597" y="315" width="597" height="490" key="find.popup" timestamp="1648416244096">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="597" y="315" width="597" height="490" key="find.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1645652212066" />
+    <state x="597" y="315" width="597" height="490" key="find.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1648416244096" />
+    <state x="545" y="294" width="700" height="530" key="recent.locations.popup" timestamp="1647491358541">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="545" y="294" width="700" height="530" key="recent.locations.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1647491358541" />
+    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup" timestamp="1647491369290">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1647491369290" />
+    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup/0.25.1792.1033@0.25.1792.1033" timestamp="1646537746512" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/tacticgen/TacticGenerator.java</url>
-          <line>35</line>
+          <line>38</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
