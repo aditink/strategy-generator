@@ -37,9 +37,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="759f3c5e-9f19-46d4-a1ef-97cc2b5a3100" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/strategy_generator_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/strategy_generator_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/strategy_generator_jar/strategy-generator.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/strategy_generator_jar/strategy-generator.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TacticGenTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TacticGenTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

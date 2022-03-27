@@ -54,11 +54,12 @@ public class TacticGenTest {
 
     // let's try and initialize a map
     // initialize Tuple first
-    // Tuple2<BaseVariable,BaseVariable> iv1 = Tuple2$.MODULE$.apply(new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$),new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$));
+    Tuple2<BaseVariable,BaseVariable> iv1 = Tuple2$.MODULE$.apply(new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$),new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$));
 
     // then initialize sequence from tuple (need to add several tuples)
-    // Seq<Tuple2<BaseVariable,BaseVariable>> ivs = Seq$.MODULE$.apply(iv1);
-    
+    Builder<Tuple2<BaseVariable,BaseVariable>, Seq<Tuple2<BaseVariable,BaseVariable>>> builder = Seq$.MODULE$.newBuilder();
+    Seq<Tuple2<BaseVariable,BaseVariable>> ivs =  builder.$plus$eq(iv1).result();
+
     // then make Map out of sequence like here
     Map<Variable,Variable> iv = new Map.Map1(new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$),
             new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$)); //Map$.MODULE$.
