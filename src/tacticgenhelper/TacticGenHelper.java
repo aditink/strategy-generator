@@ -1,8 +1,8 @@
 /*
 TODOS:
 1. solve errors (program seems to run fine, but IDE complains)
-2. Write getInitConds()
-3. Write getDynConds()
+2. Write getConstAssumpts()
+3. More rigorously analyze getDE() and getChoices()
 */
 
 package tacticgenhelper;
@@ -55,7 +55,7 @@ public class TacticGenHelper{
     return parser.formulaParser().apply(s);
   }
 
-  public static DifferentialProgram strToDE(String s){
+  public static DifferentialProgram strToDiffProg(String s){
     DLParser parser = new DLParser();
     return parser.differentialProgramParser().apply(s);
   }
@@ -64,7 +64,6 @@ public class TacticGenHelper{
     DLParser parser = new DLParser();
     return parser.termParser().apply(s);
   }
-
 
   public static String getTopLevel(Sequent s){
     // get top level op and return as "DE", "LI", or "other"
@@ -127,12 +126,72 @@ public class TacticGenHelper{
     return new And(getSafetyConds(s), getConstAssumpts(s));
   }
 
-  public static Formula getDynConds(Sequent s){ // TODO: parse out dynamics conditions
-    return strToFormula("vC>=0&vL>=0");
-  }
 
   public static Formula getConstAssumpts(Sequent s){ // TODO: get constant assumptions
     return strToFormula("A>0&B>0");
+  }
+
+  public static Term getKinemEqForT(){
+    // t = (vf-vi)/a
+    return strToTerm("(vf-vi)/a");
+  }
+
+  // what other program operations do I need to deal with? none?
+  public static ODESystem getDE(Program p){ // this only works if the program has 1 differential equation: need to deal with multiple?
+    //System.out.println(p.prettyString());
+    ODESystem candidate = null;
+    if (p instanceof ODESystem){
+      return (ODESystem)p;
+    }
+    else if (p instanceof Loop){
+      return getDE(((Loop)p).child());
+    }
+    else if (p instanceof Choice){
+      candidate = getDE(((Choice)p).left());
+      if (candidate == null)
+        candidate = getDE(((Choice)p).right());
+    }
+    else if (p instanceof Compose){
+      candidate = getDE(((Compose)p).left());
+      if (candidate == null)
+        candidate = getDE(((Compose)p).right());
+    }
+    return candidate;
+  }
+
+  public static Formula getDomainConst(Program p){
+    return getDE(p).constraint();
+  }
+  
+
+  public static ArrayList<Program> getChoices(Program p, ArrayList<Program> choices){
+    //System.out.println(p.prettyString());
+    if (p instanceof Loop){
+      return getChoices(((Loop)p).child(), choices);
+    }
+    else if (p instanceof Choice){ // choices we want to pull will be in the form ?P; choice;, so parse accordingly
+      Program left_choice = ((Choice)p).left();
+      Program right_choice = ((Choice)p).right();
+      if (left_choice instanceof Compose){
+        choices.add(((Compose)left_choice).right());
+      }
+      else if(!(left_choice instanceof Choice)){ 
+        choices.add(left_choice);
+      }
+      if (right_choice instanceof Compose){
+        choices.add(((Compose)right_choice).right());
+      }
+      else if (!(right_choice instanceof Choice)){
+        choices.add(right_choice);
+      }
+      choices = getChoices(((Choice)p).left(), choices);
+      choices = getChoices(((Choice)p).right(), choices);
+    }
+    else if (p instanceof Compose){
+      choices = getChoices(((Compose)p).left(), choices);
+      choices = getChoices(((Compose)p).right(), choices);
+    }
+    return choices;
   }
 
 }

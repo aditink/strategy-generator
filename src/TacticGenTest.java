@@ -29,6 +29,8 @@ import scala.Tuple2$;
 import scala.collection.mutable.Builder;
 import scala.collection.immutable.Map;
 import scala.collection.immutable.Map$;
+import scala.collection.Seq;
+import scala.collection.Seq$;
 import scala.Option;
 import scala.Option$;
 
@@ -37,8 +39,11 @@ import tacticgenhelper.*;
 
 import scala.math.BigDecimal;
 import edu.cmu.cs.ls.keymaerax.core.Number;
+import scala.collection.IndexedSeq;
 import scala.collection.JavaConverters;
 import scala.collection.JavaConverters$;
+
+import scala.collection.immutable.List;
 
 public class TacticGenTest {
 
@@ -47,37 +52,38 @@ public class TacticGenTest {
     TacticGenerator tgen = new TacticGenerator();
 
 
-    Sequent seq = TacticGenHelper.strToSequent("y>0 ==> [{{x'=1};}*]pL-pC>=0");
-    //String s = new String("y>0 ==> [{x:=1;}++{x:=-1;};]x>=0");
+    // let's try and initialize a map
+    // initialize Tuple first
+    Tuple2<BaseVariable,BaseVariable> iv1 = Tuple2$.MODULE$.apply(new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$),new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$));
+
+    // then initialize sequence from tuple (need to add several tuples)
+    //Seq<Tuple2<BaseVariable,BaseVariable>> ivs = Seq$.MODULE$.apply(iv1);
+    
+    // then make Map out of sequence like here
+    //Map<Variable,Variable> iv = Map$.MODULE$.apply(ivs);
+
+    // TEST
+    System.out.println("PRINTING MAP");
+    //System.out.println(iv);
+    System.out.println("DONE PRINTING MAP");
+
+
+
+
+
+
+    
+    Sequent seq = TacticGenHelper.strToSequent("(initialConds(pL, pC, vL, vC, aL, aC))  ==>  [  {  {  ?accTest(pL, pC, vL, vC, aL, aC) ;  aC := A;  ++ ?brakeTest(pL, pC, vL, vC, aL, aC); aC := -B;++ ?vC=0; aC := 0;  }  {  aL:=A; ++ aL:=-B; ++ ?vC=0; aL := 0; }  {  t := 0;  { pL'=vL, vL'=aL, pC'=vC, vC'=aC, t'=1 &  vL>=0 & vC>=0 & t<=T }  }  }* ]   ( safetyTest(pL, pC) )");
+
+
+    ODESystem de = TacticGenHelper.getDE(TacticGenHelper.getProgram(seq));
+    System.out.println("DE = " + de.prettyString());
+    Formula constraint = TacticGenHelper.getDomainConst(TacticGenHelper.getProgram(seq));
+    System.out.println("domain constraints = " + constraint.prettyString());
+    System.out.println();
 
     BelleExpr tactic = tgen.getTactic(seq);
     System.out.println(tactic.prettyString());
-
- 
-    // Try using proveBy()
-    /*System.out.println(seq.prettyString());
-
-    BelleExpr solveTactic = TactixLibrary.solve().apply(new SuccPos(0));
-    BelleExpr unfoldTactic = TactixLibrary.unfoldProgramNormalize();
-
-    ProvableSig postRule = TactixLibrary.proveBy(seq, solveTactic); // TODO: solve tactic needs position arg
-    System.out.println(postRule.prettyString());*/
-
-
-
-
-
-    // try solving ODE
-    // DifferentialProgram diffSys = (DifferentialProgram) TacticGenHelper.strToDE("x'=1");
-    // Variable diffArg = new BaseVariable("t", Option$.MODULE$.empty(), Real$.MODULE$);
-    // HashMap<Variable,Variable> iv = new HashMap<Variable,Variable>();
-    // //iv.put(new BaseVariable("x", Option$.MODULE$.empty(), Real$.MODULE$), new Number(BigDecimal.decimal(0)));
-    // iv.put(new BaseVariable("x", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("y", Option$.MODULE$.empty(), Real$.MODULE$));
-    //Map<Variable,Variable> iv = Map$.MODULE$.empty(); // this needs to map x to 0
-
-    //Option<Formula> odeSolved = TacticGenHelper.getDESolution(diffSys, diffArg, JavaConverters$.asScala(iv)); // TODO: recognize asScala()
-    //System.out.println(odeSolved);
-
   }
 }
 
