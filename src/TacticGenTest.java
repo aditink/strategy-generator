@@ -51,22 +51,31 @@ public class TacticGenTest {
     KeYmaeraX.initializeProver(Map$.MODULE$.empty(), Usage.cliUsage());
     TacticGenerator tgen = new TacticGenerator();
 
+    Sequent seq = TacticGenHelper.strToSequent("(initialConds(pL, pC, vL, vC, aL, aC))  ==>  [  {  {  ?accTest(pL, pC, vL, vC, aL, aC) ;  aC := A;  ++ ?brakeTest(pL, pC, vL, vC, aL, aC); aC := -B;++ ?vC=0; aC := 0;  }  {  aL:=A; ++ aL:=-B; ++ ?vC=0; aL := 0; }  {  t := 0;  { pL'=vL, vL'=aL, pC'=vC, vC'=aC, t'=1 &  vL>=0 & vC>=0 & t<=T }  }  }* ]   ( safetyTest(pL, pC) )");
 
-    // let's try and initialize a map
-    // initialize Tuple first
-    Tuple2<BaseVariable,BaseVariable> iv1 = Tuple2$.MODULE$.apply(new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$),new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$));
+    System.out.println("getting ODE...");
+    ODESystem ode = TacticGenHelper.getDE(TacticGenHelper.getProgram(seq));
+    System.out.println("got ODE: "+ode.toString()+", now solving ODE");
+    System.out.println();
+    DifferentialProgram diffSys = ode.ode();
+    Variable diffArg = new BaseVariable("t", Option$.MODULE$.empty(), Real$.MODULE$);
 
-    // then initialize sequence from tuple (need to add several tuples)
-    Builder<Tuple2<BaseVariable,BaseVariable>, Seq<Tuple2<BaseVariable,BaseVariable>>> builder = Seq$.MODULE$.newBuilder();
-    Seq<Tuple2<BaseVariable,BaseVariable>> ivs =  builder.$plus$eq(iv1).result();
-
-    // then make Map out of sequence like here
+    // TODO: how to get variables for iv map
     Map<Variable,Variable> iv = new Map.Map1(new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$),
-            new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$)); //Map$.MODULE$.
+            new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$)); // need to initialize Map
+
+            iv = iv.updated(new BaseVariable("vL", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("vL", Option$.MODULE$.empty(), Real$.MODULE$));
+            iv = iv.updated(new BaseVariable("aL", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("aL", Option$.MODULE$.empty(), Real$.MODULE$));
+            iv = iv.updated(new BaseVariable("pC", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("pC", Option$.MODULE$.empty(), Real$.MODULE$));
+            iv = iv.updated(new BaseVariable("vC", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("vC", Option$.MODULE$.empty(), Real$.MODULE$));
+            iv = iv.updated(new BaseVariable("aC", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("aC", Option$.MODULE$.empty(), Real$.MODULE$));
+
+    //iv.
+    Option<Formula> odeSol = TacticGenHelper.getDESolution(diffSys, diffArg, iv);
 
     // TEST
     System.out.println("PRINTING MAP");
-    //System.out.println(iv);
+    System.out.println(iv);
     System.out.println("DONE PRINTING MAP");
 
 
@@ -75,7 +84,7 @@ public class TacticGenTest {
 
 
     
-    Sequent seq = TacticGenHelper.strToSequent("(initialConds(pL, pC, vL, vC, aL, aC))  ==>  [  {  {  ?accTest(pL, pC, vL, vC, aL, aC) ;  aC := A;  ++ ?brakeTest(pL, pC, vL, vC, aL, aC); aC := -B;++ ?vC=0; aC := 0;  }  {  aL:=A; ++ aL:=-B; ++ ?vC=0; aL := 0; }  {  t := 0;  { pL'=vL, vL'=aL, pC'=vC, vC'=aC, t'=1 &  vL>=0 & vC>=0 & t<=T }  }  }* ]   ( safetyTest(pL, pC) )");
+    //Sequent seq = TacticGenHelper.strToSequent("(initialConds(pL, pC, vL, vC, aL, aC))  ==>  [  {  {  ?accTest(pL, pC, vL, vC, aL, aC) ;  aC := A;  ++ ?brakeTest(pL, pC, vL, vC, aL, aC); aC := -B;++ ?vC=0; aC := 0;  }  {  aL:=A; ++ aL:=-B; ++ ?vC=0; aL := 0; }  {  t := 0;  { pL'=vL, vL'=aL, pC'=vC, vC'=aC, t'=1 &  vL>=0 & vC>=0 & t<=T }  }  }* ]   ( safetyTest(pL, pC) )");
 
 
     ODESystem de = TacticGenHelper.getDE(TacticGenHelper.getProgram(seq));

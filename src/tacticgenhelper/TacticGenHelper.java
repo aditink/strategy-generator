@@ -1,8 +1,7 @@
 /*
 TODOS:
 1. solve errors (program seems to run fine, but IDE complains)
-2. Write getConstAssumpts()
-3. More rigorously analyze getDE() and getChoices()
+2. More rigorously analyze getDE() and getChoices()
 */
 
 package tacticgenhelper;
@@ -27,8 +26,9 @@ import edu.cmu.cs.ls.keymaerax.Configuration$;
 import edu.cmu.cs.ls.keymaerax.cli.KeYmaeraX;
 import edu.cmu.cs.ls.keymaerax.FileConfiguration;
 import edu.cmu.cs.ls.keymaerax.btactics.TactixLibrary;
-
+import edu.cmu.cs.ls.keymaerax.btactics.ToolProvider;
 import edu.cmu.cs.ls.keymaerax.btactics.HybridProgramCalculus;
+import edu.cmu.cs.ls.keymaerax.btactics.MathematicaToolProvider;
 import edu.cmu.cs.ls.keymaerax.bellerophon.parser.*;
 import edu.cmu.cs.ls.keymaerax.btactics.TactixLibrary.*;
 import scala.Option;
@@ -83,7 +83,7 @@ public class TacticGenHelper{
         return "other";
     }
     else{
-      Formula formula = s.succ().head(); // TODO: test this
+      Formula formula = s.succ().head();
       if (formula instanceof Loop)
         return "LI";
       else if (formula instanceof ODESystem)
@@ -102,6 +102,8 @@ public class TacticGenHelper{
   }
 
   public static Option<Formula> getDESolution(DifferentialProgram diffSys, Variable diffArg, Map<Variable,Variable> iv){
+    //MathematicaToolProvider mtp = new MathematicaToolProvider(FileConfiguration$);
+    //MathematicaToolProvider.init();
     MathematicaODESolverTool odeSolver = new MathematicaODESolverTool(new JLinkMathematicaLink("mathematica"));
     Option<Formula> odeSolution = odeSolver.odeSolve(diffSys, diffArg, iv);
     return odeSolution;
@@ -122,14 +124,10 @@ public class TacticGenHelper{
     return proof.isProved();
   }
 
-  public static Formula getInitConds(Sequent s){ // TODO: can assume safety conditions + constant assumptions
-    return new And(getSafetyConds(s), getConstAssumpts(s));
+  public static Formula getInitConds(Sequent s){
+    return s.ante().head();
   }
 
-
-  public static Formula getConstAssumpts(Sequent s){ // TODO: get constant assumptions
-    return strToFormula("A>0&B>0");
-  }
 
   public static Term getKinemEqForT(){
     // t = (vf-vi)/a
@@ -194,6 +192,16 @@ public class TacticGenHelper{
     return choices;
   }
 
+  public static Term getConstraint(Formula f){ // TODO: ASSUMPTION: always get right child as breaking point
+    if (f instanceof Greater){
+      return ((Greater)f).right();
+    }
+    else if (f instanceof GreaterEqual){
+      return ((GreaterEqual)f).right();
+    }
+    System.out.println("formula is not an instanceof Greater or GreaterEqual. Returning null...");
+    return null;
+  }
 }
 
 

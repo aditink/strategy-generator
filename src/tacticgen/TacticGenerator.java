@@ -2,8 +2,8 @@
 TODOS:
 Should DE, choices, dynamic conditions and constant assumptions be passed in?
   1. Solve ODE
-    - subproblem: create immutable scala Map with the correct mappings
-  2. Debug last section of loop invariant algorithm
+    - subproblem: no math kernel set error?
+  2. Clean up last section of loop invariant algorithm
 */
 
 package tacticgen;
@@ -51,10 +51,10 @@ public class TacticGenerator implements StrategyGenerator{
   }
 
 
-  private BelleExpr getLoopInv(Sequent s){//, Provable p){
+  private BelleExpr getLoopInv(Sequent s){
     // Loop Invariant Algorithm:
     Formula J;
-    Formula initialConds = TacticGenHelper.getInitConds(s); // TODO: write getConstAssumpts which getInitConds() depends on, hardcode for now
+    Formula initialConds = TacticGenHelper.getInitConds(s);
     
     // 1. set LI = safety condition (safety condition has to be in the form a >= 0 or a > 0)
     J = TacticGenHelper.getSafetyConds(s);
@@ -67,17 +67,25 @@ public class TacticGenerator implements StrategyGenerator{
     System.out.println();
     DifferentialProgram diffSys = ode.ode();
     Variable diffArg = new BaseVariable("t", Option$.MODULE$.empty(), Real$.MODULE$);
-    Map<Variable,Variable> iv = Map$.MODULE$.empty(); // need to initialize Map
+
+    // TODO: how to get variables for iv map
+    Map<Variable,Variable> iv = new Map.Map1(new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$),
+            new BaseVariable("pL", Option$.MODULE$.empty(), Real$.MODULE$)); // need to initialize Map
+
+            iv = iv.updated(new BaseVariable("vL", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("vL", Option$.MODULE$.empty(), Real$.MODULE$));
+            iv = iv.updated(new BaseVariable("aL", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("aL", Option$.MODULE$.empty(), Real$.MODULE$));
+            iv = iv.updated(new BaseVariable("pC", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("pC", Option$.MODULE$.empty(), Real$.MODULE$));
+            iv = iv.updated(new BaseVariable("vC", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("vC", Option$.MODULE$.empty(), Real$.MODULE$));
+            iv = iv.updated(new BaseVariable("aC", Option$.MODULE$.empty(), Real$.MODULE$), new BaseVariable("aC", Option$.MODULE$.empty(), Real$.MODULE$));
 
     //iv.
-    //Option<Formula> odeSol = TacticGenHelper.getDESolution(diffSys, diffArg, iv);
-    //System.out.println("ODE solved");
+    Option<Formula> odeSol = TacticGenHelper.getDESolution(diffSys, diffArg, iv);
+    System.out.println("ODE solution = " + odeSol);
     
     Term lhsSafetyPostDyn = TacticGenHelper.strToTerm("(pL+vL*t+aL*t^2/2)-(pC+vC*t+aC*t^2/2)");  // TODO: remove hardcoding
     Formula safetyPostDyn = new GreaterEqual(lhsSafetyPostDyn, zero);
 
     // 3. find safest control car choice
-    // TODO: extract CC choices from sequent, fill ccChoices
     ArrayList<Program> choices = TacticGenHelper.getChoices(TacticGenHelper.getProgram(s), new ArrayList<Program>());
     System.out.println("Getting choices...");
     System.out.println(choices);
@@ -103,7 +111,6 @@ public class TacticGenerator implements StrategyGenerator{
     }
 
     // 4. find least-safe leading car choice
-    // TODO: extract LC choices from sequent, fill lcChoices
     ArrayList<Term> lcChoices = new ArrayList<Term>();
     for (Program choice : choices){
       if (choice.toString().contains("aL")){ // TODO: change this to get choice.val and compare
@@ -135,7 +142,7 @@ public class TacticGenerator implements StrategyGenerator{
     // 6. loop through dynamics conditions that CC controls (conditions with pC, vC, and aC)
     // find 't' when the condition breaks assuming bestCCChoice
     // if t >= 0 && t =< tUntilBroken, tUntilBroken = t 
-    Formula dynConds = TacticGenHelper.getDomainConst(TacticGenHelper.getProgram(s)); // TODO: get dynamics conditions from sequent
+    Formula dynConds = TacticGenHelper.getDomainConst(TacticGenHelper.getProgram(s));
     ArrayList<Formula> dynCondsList = new ArrayList<Formula>();
     for (String cond : dynConds.toString().split("&")){
       dynCondsList.add(TacticGenHelper.strToFormula(cond));
@@ -145,10 +152,12 @@ public class TacticGenerator implements StrategyGenerator{
     for (Formula cond : dynCondsList){
       if (cond.toString().contains("pC") || cond.toString().contains("vC") || cond.toString().contains("aC")){ // TODO: get vars that CC controls
         // TODO: get t when condition breaks;
+        // TODO: assumes constraint is on velocity
         Term t = TacticGenHelper.getKinemEqForT(); 
+        Term whenBreaks = TacticGenHelper.getConstraint(cond);
         //t = TacticGenHelper.strToTerm(TacticGenHelper.subVar("vi", "vC", t.toString())); // vC is always initial velocity
-        //t = TacticGenHelper.strToTerm(TacticGenHelper.subVar("a", bestCCChoice.toString(), t.toString())); // is choice here always
-        //t = TacticGenHelper.strToTerm(TacticGenHelper.subVar("vf", "0", t.toString())); // how do I get this?
+        //t = TacticGenHelper.strToTerm(TacticGenHelper.subVar("a", bestCCChoice.toString(), t.toString())); // TODO: is choice here always
+        //t = TacticGenHelper.strToTerm(TacticGenHelper.subVar("vf", whenBreaks.toString(), t.toString())); // TODO: how do I get this?
         //System.out.println(t);
 
         t = TacticGenHelper.strToTerm("vC/B"); // TODO: remove hardcoding
@@ -158,7 +167,7 @@ public class TacticGenerator implements StrategyGenerator{
         //System.out.println((new Imply(solvedForT, TacticGenHelper.strToFormula("t<=tUntilBroken"))));
 
         // if constant assumptions, dynamic conditions, and t=solvedForT => t>=0 & t<=tUntilBroken, then tUntilBroken = t
-        if (TacticGenHelper.isTrue(new Imply(new And(new And(solvedForT, TacticGenHelper.getConstAssumpts(s)), TacticGenHelper.getDomainConst(TacticGenHelper.getProgram(s))), TacticGenHelper.strToFormula("t>=0"))) && tUntilBroken == null || TacticGenHelper.isTrue(new Imply(new And(new And(solvedForT, TacticGenHelper.getConstAssumpts(s)), TacticGenHelper.getDomainConst(TacticGenHelper.getProgram(s))), TacticGenHelper.strToFormula("t<=tUntilBroken")))){
+        if (TacticGenHelper.isTrue(new Imply(new And(new And(solvedForT, TacticGenHelper.getInitConds(s)), TacticGenHelper.getDomainConst(TacticGenHelper.getProgram(s))), TacticGenHelper.strToFormula("t>=0"))) && tUntilBroken == null || TacticGenHelper.isTrue(new Imply(new And(new And(solvedForT, TacticGenHelper.getInitConds(s)), TacticGenHelper.getDomainConst(TacticGenHelper.getProgram(s))), TacticGenHelper.strToFormula("t<=tUntilBroken")))){
           tUntilBroken = t;
         }
       }
