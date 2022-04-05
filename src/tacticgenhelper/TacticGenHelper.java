@@ -1,7 +1,6 @@
 /*
 TODOS:
 1. solve errors (program seems to run fine, but IDE complains)
-2. More rigorously analyze getDE() and getChoices()
 */
 
 package tacticgenhelper;
@@ -14,6 +13,8 @@ import edu.cmu.cs.ls.keymaerax.FileConfiguration$;
 import edu.cmu.cs.ls.keymaerax.bellerophon.BelleExpr;
 import edu.cmu.cs.ls.keymaerax.cli.Usage;
 import edu.cmu.cs.ls.keymaerax.core.*;
+import edu.cmu.cs.ls.keymaerax.core.StaticSemantics.VCF;
+import edu.cmu.cs.ls.keymaerax.core.StaticSemantics.VCP;
 import edu.cmu.cs.ls.keymaerax.parser.*;
 import edu.cmu.cs.ls.keymaerax.pt.ProvableSig;
 import edu.cmu.cs.ls.keymaerax.tools.ext.JLinkMathematicaLink;
@@ -102,11 +103,31 @@ public class TacticGenHelper{
   }
 
   public static Option<Formula> getDESolution(DifferentialProgram diffSys, Variable diffArg, Map<Variable,Variable> iv){
-    //MathematicaToolProvider mtp = new MathematicaToolProvider(FileConfiguration$);
-    //MathematicaToolProvider.init();
+
     MathematicaODESolverTool odeSolver = new MathematicaODESolverTool(new JLinkMathematicaLink("mathematica"));
     Option<Formula> odeSolution = odeSolver.odeSolve(diffSys, diffArg, iv);
+
+
     return odeSolution;
+  }
+
+  public static Formula getSafetyPostDyn(Sequent goal){ // goal is sequent with just succ as [{ODE}]safety
+    SuccPos pos = new SuccPos(0);
+    //Sequent goal = TacticGenHelper.strToSequent(" ==> [{ pL'=vL, vL'=aL, pC'=vC, vC'=aC, t'=1 &  vL>=0 & vC>=0 & t<=T }]pL-pC>0");
+    
+    BelleExpr solTactic = TactixLibrary.solve().apply(pos);
+    ProvableSig postSolve = TactixLibrary.proveBy(goal, solTactic);
+
+    Provable odeProv = postSolve.underlyingProvable();
+
+    Sequent solvedODE = odeProv.subgoals().head();
+
+
+    Formula solvedODEChild = ((Forall)solvedODE.succ().head()).child();
+    Formula solvedODEGrandchild = ((Imply)solvedODEChild).right();
+    Formula solvedODEOnly = ((Imply)solvedODEGrandchild).right();
+
+    return solvedODEOnly;
   }
 
   public static String subVar(String oldVar, String newVar, String term){
@@ -128,6 +149,39 @@ public class TacticGenHelper{
     return s.ante().head();
   }
 
+  public static Formula getConstAssumpts(Sequent s){
+    Formula constAssumpts = strToFormula("true");
+    // get bound variables
+    Program p = getProgram(s);
+    //SetLattice<Variable> constants = getConstants(p);
+    SetLattice<Variable> boundVars = getBoundVars(p);
+
+    // then, get initial conditions that bound those constants (if any)
+    ArrayList<Formula> initConds = breakDownAnds(getInitConds(s));
+    //System.out.println("initConds = " + initConds);
+    //System.out.println("Bound vars = " + boundVars);
+    for (Formula cond : initConds){
+      // if condition does not involve non-constants, we can use it
+      SetLattice<Variable> freeVars = getFreeVars(cond);
+      if (freeVars.intersect(boundVars).isEmpty()){
+        //System.out.println("adding to constAssumpts");
+        constAssumpts = new And(constAssumpts,cond);
+      }
+    }
+    return constAssumpts;
+  }
+
+  public static ArrayList<Formula> breakDownAnds(Formula ands){
+    //System.out.println("breaking down ands..." + ands);
+    ArrayList<Formula> conditions = new ArrayList<Formula>();
+    while (ands instanceof And){
+      //System.out.println("adding " + ((And) ands).left());
+      //System.out.println("left with " + ((And) ands).right());
+      conditions.add(((And) ands).left()); // is the order guaranteed that for initial conditions left breaks down first?
+      ands = ((And) ands).right();
+    }
+    return conditions;
+  }
 
   public static Term getKinemEqForT(){
     // t = (vf-vi)/a
@@ -192,7 +246,7 @@ public class TacticGenHelper{
     return choices;
   }
 
-  public static Term getConstraint(Formula f){ // TODO: ASSUMPTION: always get right child as breaking point
+  public static Term getConstraint(Formula f){ // ASSUMPTION: always get right child as breaking point
     if (f instanceof Greater){
       return ((Greater)f).right();
     }
@@ -201,6 +255,21 @@ public class TacticGenHelper{
     }
     System.out.println("formula is not an instanceof Greater or GreaterEqual. Returning null...");
     return null;
+  }
+
+  public static SetLattice<Variable> getConstants(Program p){
+    VCP vcp = StaticSemantics.apply(p);
+    return vcp.fv().$minus$minus(vcp.bv()); // constants are free variables set minus bound variables
+  }
+
+  public static SetLattice<Variable> getBoundVars(Program p){
+    VCP vcp = StaticSemantics.apply(p);
+    return vcp.bv();
+  }
+
+  public static SetLattice<Variable> getFreeVars(Formula f){
+    VCF vcf = StaticSemantics.apply(f);
+    return vcf.fv();
   }
 }
 
